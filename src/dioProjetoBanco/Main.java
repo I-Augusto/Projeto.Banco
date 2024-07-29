@@ -20,9 +20,9 @@ public class Main {
 		 * imprimirClientes 
 		 * imprimirContas 
 		 * imprimirHistoricoTransacoes
-		 * bloquearConta 
-		 * desbloquearConta 
-		 * alterarLimiteCredito (novo limite)
+		 * bloquearConta (conta)
+		 * desbloquearConta (conta)
+		 * alterarLimiteCredito (conta, novo limite)
 		 * consultarSaldo (conta) 
 		 * verificarLimiteCredito (conta) 
 		 * consultarDadosConta (conta)
