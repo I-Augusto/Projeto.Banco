@@ -110,9 +110,9 @@ public class Conta {
 	public String toString() {
 		return "Agencia: " + agencia + 
 				" Numero da conta: " + this.numeroDaConta + 
-				" Numero da conta: " + this.saldo + 
-				" Numero da conta: " + this.limiteDeCredito + 
-				" Numero da conta: " + ((this.estadoDaConta) ? "Ativa" : "Inativa") + 
+				" Saldo da conta: " + this.saldo + 
+				" Limite de crédito da conta: " + this.limiteDeCredito + 
+				" Estado da conta: " + ((this.estadoDaConta) ? "Ativa" : "Inativa") + 
 				" Cliente: " + this.cliente;
 	}
 	
