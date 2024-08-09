@@ -1,4 +1,4 @@
-package dioProjetoBanco.Transacao;
+package Transacao;
 
 import java.time.LocalDate;
 

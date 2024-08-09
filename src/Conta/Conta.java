@@ -1,10 +1,11 @@
-package dioProjetoBanco.Conta;
+package Conta;
 
 import java.time.LocalDate;
 
-import dioProjetoBanco.Banco.Banco;
-import dioProjetoBanco.Cliente.Cliente;
-import dioProjetoBanco.Transacao.Transacao;
+import Banco.Banco;
+import Cliente.Cliente;
+import Transacao.Transacao;
+import sistemaBancarioFacade.SistemaBancario;
 
 public class Conta {
 	
@@ -17,18 +18,18 @@ public class Conta {
 	protected double limiteDeCredito;
 	protected boolean estadoDaConta;
 	protected Cliente cliente;
-	protected Banco banco;
+	protected Banco banco = Banco.getInstancia();
 	protected Conta conta;
 	protected Transacao transacao;
+	SistemaBancario sistemaBanco = SistemaBancario.getInstancia();
 	
-	public Conta(String nomeCliente,String emailCliente, int cpfCliente, int telefoneCliente, LocalDate dataDeNascimentoCliente, Banco banco) {
+	public Conta(String nomeCliente,String emailCliente, int cpfCliente, int telefoneCliente, LocalDate dataDeNascimentoCliente) {
 		this.agencia = AGENCIA_PADRAO;
 		this.numeroDaConta = SEQUENCIA_CONTA++;
 		this.saldo = 0;
 		this.limiteDeCredito = 0;
 		this.estadoDaConta = true;
 		this.cliente = new Cliente(nomeCliente, emailCliente, cpfCliente, telefoneCliente, dataDeNascimentoCliente );
-		this.banco = banco;
 		banco.adicionarClienteBanco(cliente);	
 	}
 	
@@ -58,7 +59,7 @@ public class Conta {
 	}
 
 	public void consultarSaldo() {
-		System.out.println(String.format("Saldo da conta: %.2f", saldo));
+		sistemaBanco.consultarSaldo(this);
 	}
 	
 	public void sacar(double valor, LocalDate data) {
@@ -88,22 +89,11 @@ public class Conta {
 	}
 	
 	public void verificarLimiteCredito() {
-		System.out.println(String.format("Limite atual: %.2f", this.limiteDeCredito));
+		sistemaBanco.verificarLimiteCredito(this);
 	}
 	
-	protected void consultarDadosConta() {
-		//System.out.println("======= DADOS DA CONTA =======");
-		System.out.println(String.format("Cliente: %s", cliente.getNome()));
-		System.out.println(String.format("CPF do titular: %d", cliente.getCpf()));
-		System.out.println(String.format("Email do titular: %s", cliente.getEmail()));
-		System.out.println(String.format("Telefone do titular: %d", cliente.getTelefone()));
-		System.out.println(String.format("Data de nascimento do titular: %s", cliente.getDataDeNascimento()));
-		System.out.println(String.format("Saldo atual: %.2f", this.saldo));
-		System.out.println(String.format("Agência: %d", this.agencia));
-		System.out.println(String.format("Número da conta: %d", this.numeroDaConta));
-		System.out.println(String.format("Estado da conta: " + (this.estadoDaConta ? "Ativa" : "Inativa")));
-		System.out.println(String.format("Limitede crédito: %.2f", this.limiteDeCredito));
-		
+	protected void consultarDadosConta() {		
+		sistemaBanco.consultarDadosConta(this, cliente);
 	}
 	
 	@Override

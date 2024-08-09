@@ -1,4 +1,4 @@
-package dioProjetoBanco.Cliente;
+package Cliente;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -60,8 +60,4 @@ public class Cliente {
 		return "Nome: " + nome + " Email: " + email + " CPF: " + cpf + " Telefone: " + telefone + " Data de nascimento: " + dataDeNascimento + "\n";
 	}
 
-	
-
-	
-	
 }

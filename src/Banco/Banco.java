@@ -1,4 +1,4 @@
-package dioProjetoBanco.Banco;
+package Banco;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,20 +7,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import dioProjetoBanco.Cliente.Cliente;
-import dioProjetoBanco.Conta.Conta;
-import dioProjetoBanco.Transacao.Transacao;
+import Cliente.Cliente;
+import Conta.Conta;
+import Transacao.Transacao;
+import sistemaBancarioFacade.SistemaBancario;
 
 public class Banco {
 
 	private Set<Cliente> clientes = new HashSet<Cliente>();
 	private Map<Integer, Conta> contas;
 	private List<Transacao> transacoes;
-
-	public Banco() {
+	SistemaBancario sistemaBanco = SistemaBancario.getInstancia();
+	
+	private static class Instancia {
+		public static Banco instancia = new Banco();
+	}
+	
+	private Banco() {
 		this.clientes = new HashSet<Cliente>();
 		this.contas = new HashMap<Integer, Conta>();
 		this.transacoes = new ArrayList<Transacao>();
+	}
+	
+	public static Banco getInstancia() {
+		return Instancia.instancia;
 	}
 
 	public Set<Cliente> getClientes() {
@@ -75,25 +85,16 @@ public class Banco {
 	}
 	
 	public void consultarSaldo(Conta conta) {
-		conta.consultarSaldo();
+		sistemaBanco.consultarSaldo(conta);
 	}
 	
 	public void verificarLimiteCredito(Conta conta) {
-		conta.verificarLimiteCredito();
+		sistemaBanco.verificarLimiteCredito(conta);
 	}
 	
 	public void consultarDadosConta(Conta conta) {
 		Cliente cliente = conta.getCliente();
-		System.out.println(String.format("Cliente: %s", cliente.getNome()));
-		System.out.println(String.format("CPF do titular: %d", cliente.getCpf()));
-		System.out.println(String.format("Email do titular: %s", cliente.getEmail()));
-		System.out.println(String.format("Telefone do titular: %d", cliente.getTelefone()));
-		System.out.println(String.format("Data de nascimento do titular: %s", cliente.getDataDeNascimento()));
-		System.out.println(String.format("Saldo atual: %.2f", conta.getSaldo()));
-		System.out.println(String.format("Agência: %d", conta.getAgencia()));
-		System.out.println(String.format("Número da conta: %d", conta.getNumeroDaConta()));
-		System.out.println(String.format("Estado da conta: " + (conta.isEstadoDaConta() ? "Ativa" : "Inativa")));
-		System.out.println(String.format("Limitede crédito: %.2f", conta.getLimiteDeCredito()));
+		sistemaBanco.consultarDadosConta(conta, cliente);
 	}
 	
 }

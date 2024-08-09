@@ -1,11 +1,9 @@
-package dioProjetoBanco;
-
 import java.time.LocalDate;
 import java.time.Month;
 
-import dioProjetoBanco.Banco.Banco;
-import dioProjetoBanco.Conta.ContaCorrente;
-import dioProjetoBanco.Conta.ContaPoupanca;
+import Banco.Banco;
+import Conta.ContaCorrente;
+import Conta.ContaPoupanca;
 
 public class Main {
 	
@@ -27,7 +25,7 @@ public class Main {
 		 * verificarLimiteCredito (conta) 
 		 * consultarDadosConta (conta)
 		 */
-		Banco banco = new Banco();
+		Banco banco = Banco.getInstancia();
 		/*
 		 * metodos contas: 
 		 * consultarSaldo 
@@ -37,9 +35,9 @@ public class Main {
 		 * verificarLimiteCredito 
 		 * consultarDadosConta (conta)
 		 */	
-		ContaCorrente cc1 = new ContaCorrente("Pedro", "pedro@email.com", 123456789, 1978945623, LocalDate.of(2002, Month.JULY, 19), banco);
-		ContaPoupanca cp1 = new ContaPoupanca("cezar", "cezar@email.com", 987654321, 1978944598, LocalDate.of(2003, 12, 17), banco);
-		ContaPoupanca cp2 = new ContaPoupanca("aline", "aline@email.com", 985754321, 1978464598, LocalDate.of(2004, 10, 2), banco);
+		ContaCorrente cc1 = new ContaCorrente("Pedro", "pedro@email.com", 123456789, 1978945623, LocalDate.of(2002, Month.JULY, 19));
+		ContaPoupanca cp1 = new ContaPoupanca("cezar", "cezar@email.com", 987654321, 1978944598, LocalDate.of(2003, 12, 17));
+		ContaPoupanca cp2 = new ContaPoupanca("aline", "aline@email.com", 985754321, 1978464598, LocalDate.of(2004, 10, 2));
 		
 		cc1.consultarSaldo();
 		espaco();
